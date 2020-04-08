@@ -15,6 +15,9 @@ export const API = {
   login: (onResponse, data, isHeaderRequired) => {
     request(onResponse, data, 'POST', "JSON", isHeaderRequired, APILIST.BASE_URL + APILIST.LOGIN, buildHeader());
   },
+  signOut: (onResponse, {}, isHeaderRequired) => {
+    request(onResponse, {}, 'DELETE', "JSON", isHeaderRequired, APILIST.BASE_URL + APILIST.SIGNOUT, buildHeader());
+  },
 }
 
 async function request(onResponse, data, type, returnType, isHeaderRequired, featureURL, secureRequest) {
