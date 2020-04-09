@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, Alert, AsyncStorage } from 'react-native';
-import { Toolbar } from 'react-native-material-ui';
+import { View, Text, Alert, AsyncStorage, FlatList, TouchableOpacity } from 'react-native';
+import { Toolbar, Badge, Avatar, Icon } from 'react-native-material-ui';
 import { API } from '../util/api';
 import * as globals from '../util/globals';
 
 // Style
 const styles = require('../../AppStyles');
+
+// Data Json static
+const data = require('../util/data.json') 
 
 export default class DashboardAdmin extends Component {
   
@@ -14,8 +17,8 @@ export default class DashboardAdmin extends Component {
     this.state = {
       access_token: globals.access_token,
       first_name: globals.first_name,
-      spinner: false,
       active: 'home',
+      listUserMessage: data
     };
     this.signOut = this.signOut.bind(this);
   }
@@ -25,7 +28,7 @@ export default class DashboardAdmin extends Component {
   }
 
   actionElement(label) {
-    if (label.index == 1) {
+    if (label.index == 0) {
       this.signOut()
     }
   }
@@ -36,7 +39,6 @@ export default class DashboardAdmin extends Component {
       'Content-Type': 'application/json',
       'Authorization': `Token ${this.state.access_token}`
     }
-    this.setState({ spinner: true });
     API.signOut(this.signOutResponse,{},data)
   }
 
@@ -50,7 +52,34 @@ export default class DashboardAdmin extends Component {
       }
     },
     error: (err) => {
-      Alert.alert('Error Cierre su App y intente de nuevo',err.message,[{text:'OK'}]);
+      Alert.alert('Error Cierre su App y inicie de nuevo',err.message,[{text:'OK'}]);
+    }
+  }
+
+  renderItem = (item) =>{
+    let data = item.item
+    if (data.messageCount > 0) {
+      return(
+        <TouchableOpacity style={styles.cardChatSelect} onPress={() => this.onPressChat(data)}>
+          <Badge
+            size={24}
+            text={data.messageCount}
+            style={{ container: { top: -8, left: -10 } }}
+          >
+            <Avatar text={data.initial} />
+            <Text style={{marginTop:12}}>{data.name}</Text>
+            <Icon name="keyboard-arrow-right" style={{marginTop:12}}/>
+          </Badge>
+        </TouchableOpacity>
+      )
+    } else {
+      return(
+        <TouchableOpacity style={styles.cardChatSelect} onPress={(data) => this.onPressChat(data)}>
+          <Avatar text={data.initial} />
+          <Text>{data.name}</Text>
+          <Icon name="keyboard-arrow-right"/>
+        </TouchableOpacity>
+      )
     }
   }
 
@@ -68,18 +97,27 @@ export default class DashboardAdmin extends Component {
           rightElement={{
             menu: {
               icon: "more-vert",
-              labels: ["Settings", "Sign out"]
+              labels: ["Sign out"]
             }
           }}
           onRightElementPress={ (label) => this.actionElement(label) }
         />
-        <View style={styles.container}>
-          <View style={styles.circle} />
-          <View style={{marginHorizontal: 25}}>
-            <Text style={styles.header}>Hi, {globals.first_name + " " + globals.last_name}</Text>
-            <Text style={styles.descriptionText}>No tienes chat por el momento.</Text>
+        {this.state.listUserMessage.length != 0 ?
+          <FlatList 
+            data = {this.state.listUserMessage}
+            renderItem = {this.renderItem}
+            keyExtractor={(item)=>item.id.toString()}
+            ListEmptyComponent={this.ListEmptyComponent}
+          />
+        :
+          <View style={styles.container}>
+            <View style={styles.circle} />
+            <View style={{marginHorizontal: 25}}>
+              <Text style={styles.header}>Hi, {globals.first_name + " " + globals.last_name}</Text>
+              <Text style={styles.descriptionText}>No tienes chat por el momento.</Text>
+            </View>
           </View>
-        </View>
+        }
       </View>
     );
   }

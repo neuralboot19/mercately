@@ -95,10 +95,6 @@ export default class Login extends React.Component {
               </TouchableOpacity>
             )}
           </View>
-          <View style={styles.buttonActionsLogin}>
-            <Button primary text="Recover" />
-            <Button primary text="Sign up" />
-          </View>
         </KeyboardAvoidingView>
       </View>
     );
