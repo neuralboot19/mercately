@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text,Alert,TouchableOpacity,TextInput,Keyboard,ActivityIndicator,AsyncStorage,KeyboardAvoidingView} from 'react-native';
+import {View,Text,Alert,TouchableOpacity,TextInput,Keyboard,ActivityIndicator,AsyncStorage,KeyboardAvoidingView,Image} from 'react-native';
 import { Button, Icon } from 'react-native-material-ui';
 import { API } from '../util/api';
 import * as globals from '../util/globals';
@@ -63,6 +63,7 @@ export default class Login extends React.Component {
       <View style={styles.containerLogin}>
         <View style={styles.circle} />
         <KeyboardAvoidingView behavior="padding" enabled>
+          <Image source={require('../../assets/logo.png')} style={{width: 350, height: 100, marginHorizontal:25}} />
           <TextInput
             style={styles.input}
             onChangeText={email => this.setState({ email })}
