@@ -21,6 +21,7 @@ export default class DashboardAdmin extends Component {
       listUserMessage: data
     };
     this.signOut = this.signOut.bind(this);
+    this.onPressChat = this.onPressChat.bind(this);
   }
 
   actionSearch(search) {
@@ -56,27 +57,31 @@ export default class DashboardAdmin extends Component {
     }
   }
 
+  onPressChat = (user) => {
+    this.props.navigation.navigate('Chat',{user})
+  }
+
   renderItem = (item) =>{
-    let data = item.item
-    if (data.messageCount > 0) {
+    let user = item.item
+    if (user.messageCount > 0) {
       return(
-        <TouchableOpacity style={styles.cardChatSelect} onPress={() => this.onPressChat(data)}>
+        <TouchableOpacity style={styles.cardChatSelect} onPress={() => this.onPressChat(user)}>
           <Badge
             size={24}
-            text={data.messageCount}
+            text={user.messageCount}
             style={{ container: { top: -8, left: -10 } }}
           >
-            <Avatar text={data.initial} />
-            <Text style={{marginTop:12}}>{data.name}</Text>
+            <Avatar text={user.initial} />
+            <Text style={{marginTop:12}}>{user.name}</Text>
             <Icon name="keyboard-arrow-right" style={{marginTop:12}}/>
           </Badge>
         </TouchableOpacity>
       )
     } else {
       return(
-        <TouchableOpacity style={styles.cardChatSelect} onPress={(data) => this.onPressChat(data)}>
-          <Avatar text={data.initial} />
-          <Text>{data.name}</Text>
+        <TouchableOpacity style={styles.cardChatSelect} onPress={() => this.onPressChat(user)}>
+          <Avatar text={user.initial} />
+          <Text>{user.name}</Text>
           <Icon name="keyboard-arrow-right"/>
         </TouchableOpacity>
       )

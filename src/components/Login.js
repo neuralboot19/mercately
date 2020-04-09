@@ -1,6 +1,6 @@
 import React from 'react';
 import {View,Text,Alert,TouchableOpacity,TextInput,Keyboard,ActivityIndicator,AsyncStorage,KeyboardAvoidingView,Image} from 'react-native';
-import { Button, Icon } from 'react-native-material-ui';
+import { Icon } from 'react-native-material-ui';
 import { API } from '../util/api';
 import * as globals from '../util/globals';
 
