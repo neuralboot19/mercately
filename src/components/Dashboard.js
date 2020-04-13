@@ -35,12 +35,7 @@ export default class DashboardAdmin extends Component {
   }
   
   signOut = async() =>{
-    let data = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${this.state.access_token}`
-    }
-    API.signOut(this.signOutResponse,{},data)
+    API.signOut(this.signOutResponse,{},true)
   }
 
   signOutResponse = {

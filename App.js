@@ -42,24 +42,14 @@ export default class App extends React.Component {
           globals.access_token = token || "";
           globals.first_name = data.customer.data.attributes.first_name || "";
           globals.last_name = data.customer.data.attributes.last_name || "";
+          globals.email = data.customer.data.attributes.email || "";
+          globals.avatar = data.customer.data.attributes.avatar.url || "";
           this.setState({isLogin : true})
         }else{
           console.log("ALERTA ALERTA ========= AsyncStorage.getItem is NULL ========= ALERTA ALERTA")
           this.setState({isLogin : false})
         }
       })
-    })
-    AsyncStorage.multiGet(['password', 'access_token', 'first_name', 'last_name', 'email', 'avatar', 'status'],(error,value) =>{
-      if(value[4][1] != null && value[4][1] != undefined){
-        globals.password = value[0][1] || ""
-        globals.access_token = value[1][1] || ""
-        globals.first_name = value[2][1] || ""
-        globals.last_name = value[3][1] || ""
-        globals.email = value[4][1] || ""
-        globals.avatar = value[5][1] || ""
-        globals.status = value[6][1] || ""
-      }
-      this.setState({isLogin: value[4][1] != null})
     })
   }
 
