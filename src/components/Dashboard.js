@@ -48,7 +48,7 @@ export default class DashboardAdmin extends Component {
       }
     },
     error: (err) => {
-      Alert.alert('Error Cierre su App y inicie de nuevo',err.message,[{text:'OK'}]);
+      Alert.alert('Error Cierre su App y inicie de nuevo',err.message,[{text:'OK', onPress: () => this.props.navigation.navigate('Login')}]);
     }
   }
 
@@ -111,7 +111,6 @@ export default class DashboardAdmin extends Component {
           />
         :
           <View style={styles.container}>
-            <View style={styles.circle} />
             <View style={{marginHorizontal: 25}}>
               <Text style={styles.header}>Hi, {globals.first_name + " " + globals.last_name}</Text>
               <Text style={styles.descriptionText}>No tienes chat por el momento.</Text>

@@ -14,7 +14,7 @@ import RouterAdmin from './src/navigator/Admin';
 
 const uiTheme = {
   palette: {
-    primaryColor: "#9075E3",
+    primaryColor: "#34aae1",
     accentColor: COLOR.blue500,
   },
   toolbar: {

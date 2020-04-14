@@ -1,6 +1,6 @@
 import React from 'react';
-import {View,Text,Alert,TouchableOpacity,TextInput,Keyboard,ActivityIndicator,AsyncStorage,KeyboardAvoidingView,Image} from 'react-native';
-import { Icon } from 'react-native-material-ui';
+import {View,Text,Alert,TextInput,Keyboard,ActivityIndicator,AsyncStorage,KeyboardAvoidingView,Image} from 'react-native';
+import { Button } from 'react-native-material-ui';
 import { API } from '../util/api';
 import * as globals from '../util/globals';
 
@@ -61,38 +61,37 @@ export default class Login extends React.Component {
   render(){
     return (
       <View style={styles.containerLogin}>
-        <View style={styles.circle} />
-        <KeyboardAvoidingView behavior="padding" enabled>
-          <Image source={require('../../assets/logo.png')} style={{width: 350, height: 100, marginHorizontal:25}} />
+        <KeyboardAvoidingView behavior="padding" enabled style={{marginHorizontal: 25}}>
+          <Image source={require('../../assets/logo.png')} style={{width: 350, height: 100}} />
+          <Text style={styles.header}>Iniciar Sesión</Text>
+          <Text style={{marginTop: 20, color:'red'}}>Email</Text>
           <TextInput
             style={styles.input}
             onChangeText={email => this.setState({ email })}
             value={this.state.email}
-            placeholder="User / Email"
             keyboardType="email-address"
+            autoCapitalize="none"
             returnKeyType={"next"}
             onSubmitEditing={() => this.setFocus("passwordInput")}
           />
+          <Text style={{marginTop: 20, color:'red'}}>Password</Text>
           <TextInput
             ref={ref => (this.passwordInput = ref)}
             style={styles.input}
             onChangeText={password => this.setState({ password })}
             value={this.state.password}
-            placeholder="Password"
             secureTextEntry={true}
+            autoCapitalize="none"
             returnKeyType={"done"}
             onSubmitEditing={() => Keyboard.dismiss()}
           />
           <View style={{marginTop: 20}}>
             {this.state.spinner == true ? (
-              <View>
-                <ActivityIndicator size="small" color="#9075E3" />
+              <View style={styles.enter}>
+                <ActivityIndicator size="small" color="#34aae1" />
               </View>
             ):(
-              <TouchableOpacity style={styles.enter} onPress={this.login}>
-                <Icon name="person" color="#FFF"/>
-                <Text style={{fontSize:24,color:"#FFF"}}>Log in</Text>
-              </TouchableOpacity>
+              <Button style={{container: styles.enter, text: styles.texButton}} raised primary upperCase text="Ingresar" onPress={this.login} />
             )}
           </View>
         </KeyboardAvoidingView>
