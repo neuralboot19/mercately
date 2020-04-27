@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Platform, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import { Toolbar, Icon } from 'react-native-material-ui';
 import { GiftedChat } from 'react-native-gifted-chat';
+
+// Style
 const styles = require('../../AppStyles');
 
 export default class Chat extends Component {

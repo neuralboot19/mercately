@@ -4,7 +4,6 @@ module.exports = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F4F5F7',
-    // alignItems: 'center',
     justifyContent: 'center',
     marginTop:30
   },
@@ -12,6 +11,13 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     justifyContent: 'center',
+  },
+  containerContent: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginHorizontal: 5,
+    marginVertical: 20
   },
   header: {
     fontWeight: "bold",
@@ -26,8 +32,6 @@ module.exports = StyleSheet.create({
     height: 44,
     borderBottomWidth: 1.5,
     borderColor: "#ececec",
-    // borderRadius: 30,
-    // paddingHorizontal: 16,
     color: "#514E5A",
     fontWeight: "600"
   },

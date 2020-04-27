@@ -41,6 +41,7 @@ export default class Login extends React.Component {
           globals.access_token = JSON.stringify(response.customer.data.attributes.access_token) || '';
           globals.first_name = response.customer.data.attributes.first_name || '';
           globals.last_name = response.customer.data.attributes.last_name || '';
+          globals.email = response.customer.data.attributes.email || '';
           this.props.navigation.navigate('Dashboard');
         })
       } catch (error) {
