@@ -1,4 +1,4 @@
-export const BASE_URL = "https://hopeec-staging.herokuapp.com";
+export const BASE_URL = "https://staging.mercately.com";
 
-export const LOGIN = "/api/v1/customers/signin";
-export const SIGNOUT = "/api/v1/customers/signout";
+export const LOGIN = "/mobile/api/v1/sign_in";
+export const SIGNOUT = "/mobile/api/v1/log_out";

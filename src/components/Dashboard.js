@@ -41,15 +41,20 @@ export default class DashboardAdmin extends Component {
     success: (response) => {
       try {
         AsyncStorage.clear();
+        globals.header = null;
         this.drawer.closeDrawer();
         this.setState({leftElementIcon: 'menu', spinner: false})
         this.props.navigation.navigate('Login');
       } catch (error) {
+        AsyncStorage.clear();
+        globals.header = null;
         this.setState({spinner: false});
         Alert.alert('Error',error.message,[{text:'OK'}]);
       }
     },
     error: (err) => {
+      AsyncStorage.clear();
+      globals.header = null;
       this.setState({spinner: false});
       Alert.alert('Error Cierre su App y inicie de nuevo',err.message,[{text:'OK', onPress: () => this.props.navigation.navigate('Login')}]);
     }

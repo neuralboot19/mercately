@@ -34,16 +34,17 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem('loginData').then((item) =>{
-      const dataa = JSON.parse(item)
-      AsyncStorage.getItem('access_token').then((token) =>{
-        if(dataa !== null){
-          const data = JSON.parse(item)
-          globals.access_token = token || "";
-          globals.first_name = data.customer.data.attributes.first_name || "";
-          globals.last_name = data.customer.data.attributes.last_name || "";
-          globals.email = data.customer.data.attributes.email || "";
-          globals.avatar = data.customer.data.attributes.avatar.url || "";
+    AsyncStorage.getItem('loginData').then((item, ) =>{
+      const dataStorage = JSON.parse(item)
+      AsyncStorage.getItem('header').then((header) =>{
+        if(dataStorage !== null){
+          globals.header = JSON.parse(header) || '';
+          globals.id = dataStorage.data.attributes.id || '';
+          globals.type = dataStorage.type || '';
+          globals.admin = dataStorage.data.attributes.admin || '';
+          globals.email = dataStorage.data.attributes.email || '';
+          globals.first_name = dataStorage.data.attributes.first_name || '';
+          globals.last_name = dataStorage.data.attributes.last_name || '';
           this.setState({isLogin : true})
         }else{
           console.log("ALERTA ALERTA ========= AsyncStorage.getItem is NULL ========= ALERTA ALERTA")

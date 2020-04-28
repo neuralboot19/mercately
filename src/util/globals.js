@@ -1,4 +1,8 @@
 export const APP_NAME = "Mercately"
-export var access_token = null
-export var first_name = null
-export var last_name = null
+export let header = null
+export let id = null
+export let type = null
+export let admin = null
+export let first_name = null
+export let last_name = null
+export let email = null

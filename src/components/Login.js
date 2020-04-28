@@ -24,7 +24,7 @@ export default class Login extends React.Component {
       Alert.alert('Password','It cant be empty',[{text:'OK'}]);
     } else {
       let data = {
-        "customer": {
+        "retailer_user": {
           "email": this.state.email,
           "password": this.state.password
         }
@@ -35,13 +35,16 @@ export default class Login extends React.Component {
   }
 
   loginResponse = {
-    success: (response) => {
+    success: (response, header) => {
       try {
-        AsyncStorage.multiSet([['access_token', JSON.stringify(response.customer.data.attributes.access_token) || ''],['loginData', JSON.stringify(response)]],()=>{
-          globals.access_token = JSON.stringify(response.customer.data.attributes.access_token) || '';
-          globals.first_name = response.customer.data.attributes.first_name || '';
-          globals.last_name = response.customer.data.attributes.last_name || '';
-          globals.email = response.customer.data.attributes.email || '';
+        AsyncStorage.multiSet([['header', JSON.stringify(header)],['loginData', JSON.stringify(response)]],()=>{
+          globals.header = header || '';
+          globals.id = response.data.attributes.id || '';
+          globals.type = response.data.type || '';
+          globals.admin = response.data.attributes.admin || '';
+          globals.email = response.data.attributes.email || '';
+          globals.first_name = response.data.attributes.first_name || '';
+          globals.last_name = response.data.attributes.last_name || '';
           this.props.navigation.navigate('Dashboard');
         })
       } catch (error) {

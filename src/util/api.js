@@ -1,14 +1,26 @@
 import * as APILIST from './api_url';
 import * as globals from './globals';
 
-export const buildHeader = (headerParams = {}) => {
-  let header = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization' : 'Bearer ' + globals.access_token || ''
+export const buildHeader = () => {
+  if(globals.header == null) {
+    let header = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+    Object.assign(header);
+    return header; 
+  }else{
+    let dataHeader = globals.header
+    let header = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'token': dataHeader.map.authorization,
+      'email': globals.email,
+      'device': dataHeader.map.device,
+    }
+    Object.assign(header);
+    return header;
   }
-  Object.assign(header, headerParams);
-  return header; 
 }
 
 export const API = {
